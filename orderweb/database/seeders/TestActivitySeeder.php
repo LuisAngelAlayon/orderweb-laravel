@@ -17,6 +17,7 @@ class TestActivitySeeder extends Seeder
     {
         $typeActivity = TypeActivity::find(1);
 
+<<<<<<< HEAD
         //SELECT * FROM technician where document = 988998*/
         $technician = Technician::where('document', '=', 988998)->first();
 
@@ -24,6 +25,15 @@ class TestActivitySeeder extends Seeder
         $activity->description = 'Software-programmer';
         $activity->hours = 3;
         $activity->technician_id = $technician->document;
+=======
+        //SELECT * FROM technician where document = 23456789*/
+        $technician = Technician::where('document', '=', 23456789)->first();
+
+        $activity = new Activity();
+        $activity->description = 'Instalacion de redes';
+        $activity->hours = 3;
+        $activity->technician_id = $technician->document ?? 0;
+>>>>>>> 55589e896b7ff88fe4c0cd696005a21eb7a5cbf8
         $activity->type_id = $typeActivity->id;
         $activity->save();
 
