@@ -44,7 +44,6 @@ class DatabaseSeeder extends Seeder
         Technician::factory(2)->create([
         ]);*/
 
-<<<<<<< HEAD
         /*$this->call(TestTechnicianSeeder::class);*/
 
         /*$this->call(TestActivitySeeder::class);*/
@@ -52,11 +51,6 @@ class DatabaseSeeder extends Seeder
         /*$this->call(TestOrderSeeder::class);*/
 
         $this->call(TestOrderActivitySeeder::class);
-=======
-        //$this->call(TestTechnicianSeeder::class);*/
-
-        $this->call(TestActivitySeeder::class);
->>>>>>> 55589e896b7ff88fe4c0cd696005a21eb7a5cbf8
     }
 }
 
