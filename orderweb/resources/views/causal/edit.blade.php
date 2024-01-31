@@ -1,7 +1,7 @@
 @extends('templates.base')
 
-@section('title', 'Crear Causal')
-@section('headers', 'Crear Causal')
+@section('title', 'Editar Causal')
+@section('header', 'Editar Causal')
 
 @section('content')
     @include('templates.messages')
