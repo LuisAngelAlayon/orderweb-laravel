@@ -1,12 +1,12 @@
 @extends('templates.base')
-@section('title', 'Listado de Causales')
-@section('headers', 'Listado de Causales')
+@section('title', 'Listado de tecnico')
+@section('headers', 'Listado tecnico')
 
 @section('content')
     @include('templates.messages')
     <div class="row">
         <div class="col-lg-12 mb-4 d-grip gap-2 d-md-block">
-            <a href="{{ route('causal.create') }}" class="btn btn-primary">Crear</a>
+            <a href="{{ route('technician.create') }}" class="btn btn-primary">Crear tecnico</a>
         </div>
     </div>
 
@@ -18,17 +18,24 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Descripción</th>
+                        <th>Documento</th>
+                        <th>Nombre</th>
+                        <th>Especialidad</th>
+                        <th>Telefono</th>
                         <th>Acciones</th>
+                        <th></th>
                     </tr>
                        
                 </thead>
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td>Causal de prueba</td>
+                        <td>98273982</td>
+                        <td>Roberto</td>
+                        <td>Tec.Software</td>
+                        <td>912749242</td>
                         <td>
-                            <a href="{{ route('causal.create') }}" title="Editar" class="btn btn-info btn-circle btn-sm">
+                            <a href="{{ route('technician.create') }}" title="Editar" class="btn btn-info btn-circle btn-sm">
                                 <i class="fas fa-edit"></i>
                             </a>
                             <a href="#" title="confirmar" class="btn btn-confirm btn-circle btn-sm" 
@@ -48,6 +55,6 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('js/general.js') }}"></script>
+    <script src="{{ asset('js/general.js') }}"></script>
   
 @endsection
