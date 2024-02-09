@@ -24,23 +24,21 @@
                        
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Causal de prueba</td>
-                        <td>
-                            <a href="{{ route('causal.create') }}" title="Editar" class="btn btn-info btn-circle btn-sm">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <a href="#" title="confirmar" class="btn btn-confirm btn-circle btn-sm" 
-                            style="background-color: green; color: white">
-                                <i class="fas fa-check"></i>
-                            </a>
-                            <a href="#" title="Eliminar" 
-                                class="btn btn-danger btn-circle btn-sm" onclick="return remove()">
-                                <i class="fas fa-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
+                    @foreach ($causals as $causal)
+                        <tr>
+                            <td>{{ $causal['id'] }}</td>
+                            <td>{{ $causal['description'] }}</td>
+                            <td>
+                                <a href="{{ route('causal.edit', $causal['id']) }}" title="Editar" class="btn btn-info btn-circle btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="{{ route('causal.destroy', $causal['id']) }}" title="Eliminar" 
+                                    class="btn btn-danger btn-circle btn-sm" onclick="return remove()">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>        
         </div>

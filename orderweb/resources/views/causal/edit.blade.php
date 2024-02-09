@@ -8,12 +8,14 @@
 
     <div class="row">
         <div class="col lg-12 mb-4">
-            <form action="" method="POST">
+            <form action="{{ route('causal.update', $causal['id']) }}" method="POST">
                 @csrf
+                @method('PUT')
                 <div class="row form-group">
                     <div class="col lg-12 mb-4">
                         <label for="description">Descripción</label>
-                        <input type="text" class="form-control" id="description" name="description" required>
+                        <input type="text" class="form-control" id="description" name="description" required 
+                        value="{{ $causal['description'] }}">
                     </div>
                 </div>
                 <div class="row form-group">

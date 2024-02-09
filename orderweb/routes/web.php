@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\CausalController;
+use App\Http\Controllers\ObservationController;
+use App\Http\Controllers\Type_ActivityController;
+use Database\Seeders\ObservationSeeder;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,44 +25,35 @@ Route::get('/test2', function () {
     return view('test2');
 })->name('test2');
 
-Route::get('/causal/create', function () {
-    return view('causal.create');
-})->name('causal.create');
+Route::prefix('causal')->group(function () {
+    Route::get('/index', [CausalController::class, 'index'])->name('causal.index');
+    Route::get('/create', [CausalController::class, 'create'])->name('causal.create');
+    Route::get('/edit/{id}', [CausalController::class, 'edit'])->name('causal.edit');
+    Route::post('create', [CausalController::class, 'store'])->name('causal.store');
+    Route::put('/edit/{id}', [CausalController::class, 'update'])->name('causal.update');
+    Route::get('/destroy/{id}', [CausalController::class, 'destroy'])->name('causal.destroy');
 
-Route::get('/causal/index', function () {
-    return view('causal.index');
-})->name('causal.index');
+});
 
-Route::get('/causal/edit', function () {
-    return view('causal.edit');
-})->name('causal.edit');
+Route::prefix('observation')->group(function () {
+    Route::get('/index', [ObservationController::class, 'index'])->name('observation.index');
+    Route::get('/create', [ObservationController::class, 'create'])->name('observation.create');
+    Route::get('/edit/{id}', [ObservationController::class, 'edit'])->name('observation.edit');
+    Route::post('create', [ObservationController::class, 'store'])->name('observation.store');
+    Route::put('/edit/{id}', [ObservationController::class, 'update'])->name('observation.update');
+    Route::get('/destroy/{id}', [ObservationController::class, 'destroy'])->name('observation.destroy');
 
+});
 
-Route::get('/observation/create', function () {
-    return view('observation.create');
-})->name('observation.create');
+Route::prefix('type_activity')->group(function () {
+    Route::get('/index', [Type_ActivityController::class, 'index'])->name('type_activity.index');
+    Route::get('/create', [Type_ActivityController::class, 'create'])->name('type_activity.create');
+    Route::get('/edit/{id}', [Type_ActivityController::class, 'edit'])->name('type_activity.edit');
+    Route::post('create', [Type_ActivityController::class, 'store'])->name('type_activity.store');
+    Route::put('/edit/{id}', [Type_ActivityController::class, 'update'])->name('type_activity.update');
+    Route::get('/destroy/{id}', [Type_ActivityController::class, 'destroy'])->name('type_activity.destroy');
 
-Route::get('/observation/index', function () {
-    return view('observation.index');
-})->name('observation.index');
-
-Route::get('/observation/edit', function () {
-    return view('observation.edit');
-})->name('observation.edit');
-
-
-Route::get('/type_activity/create', function () {
-    return view('type_activity.create');
-})->name('type_activity.create');
-
-Route::get('/type_activity/index', function () {
-    return view('type_activity.index');
-})->name('type_activity.index');
-
-Route::get('/type_activity/edit', function () {
-    return view('type_activity.edit');
-})->name('type_activity.edit');
-
+});
 
 
 Route::get('/activity/create', function () {
