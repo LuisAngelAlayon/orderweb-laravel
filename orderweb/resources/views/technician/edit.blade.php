@@ -8,28 +8,32 @@
 
     <div class="row">
         <div class="col lg-12 mb-4">
-            <form action="" method="POST">
+            <form action="{{ route('technician.update', $technician['document']) }}" method="POST">
                 @csrf
+                @method('PUT')
                 <div class="row form-group">
                     <div class="col lg-6 mb-4">
                         <label for="document">Documento</label>
-                        <input type="number" class="form-control" id="document" name="Document" required>
+                        <input type="text" class="form-control" id="document" name="document" required 
+                        value="{{ $technician['document'] }}">
                     </div>
                     <div class="col lg-6 mb-4">
                         <label for="name">Nombre</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
+                        <input type="text" class="form-control" id="name" name="name" required
+                        value="{{ $technician['name'] }}">
                     </div>
                 </div>
                 <div class="row form-group">
                     <div class="col lg-6 mb-4">
                         <label for="Technician_id">Especialidad</label>
-                        <select class="form-control" id="Technician_id" name="Technician_id" required>
-                            <option value="">Seleccione</option>
-                        </select>
+                       <input type="text" class="form-control"
+                       id="especiality" name='especiality' required
+                       value="{{ $technician['especiality'] }}">
                     </div>
                     <div class="col lg-6 mb-4">
-                        <label for="telephone">Telefono</label>
-                        <input type="number" class="form-control" id="telephone" name="telephone" required>
+                        <label for="phone">Telefono</label>
+                        <input type="number" class="form-control" id="phone" name="phone" required
+                        value="{{ $technician['phone'] }}">
                     </div>
                 </div>
                 <div class="row form-group">

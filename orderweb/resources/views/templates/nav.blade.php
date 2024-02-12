@@ -102,8 +102,8 @@
                 </a>
                 <div id="collapse5" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{  route('type_activity.index') }}">Consultar Actividades</a>
-                        <a class="collapse-item" href="{{ route('type_activity.create') }}">Crear Actividades</a>
+                        <a class="collapse-item" href="{{  route('type_activity.index') }}">Consultar Tipos Actividades</a>
+                        <a class="collapse-item" href="{{ route('type_activity.create') }}">Crear Tipos Actividades</a>
                     </div>
                 </div>
             </li>

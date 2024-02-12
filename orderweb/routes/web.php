@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\CausalController;
 use App\Http\Controllers\ObservationController;
+use App\Http\Controllers\TechnicianController;
 use App\Http\Controllers\Type_ActivityController;
+use App\Models\Technician;
 use Database\Seeders\ObservationSeeder;
 use Illuminate\Support\Facades\Route;
 
@@ -55,31 +58,25 @@ Route::prefix('type_activity')->group(function () {
 
 });
 
+Route::prefix('technician')->group(function () {
+    Route::get('/index', [TechnicianController::class, 'index'])->name('technician.index');
+    Route::get('/create', [TechnicianController::class, 'create'])->name('technician.create');
+    Route::get('/edit/{document}', [TechnicianController::class, 'edit'])->name('technician.edit');
+    Route::post('create', [TechnicianController::class, 'store'])->name('technician.store');
+    Route::put('/edit/{document}', [TechnicianController::class, 'update'])->name('technician.update');
+    Route::get('/destroy/{document}', [TechnicianController::class, 'destroy'])->name('technician.destroy');
 
-Route::get('/activity/create', function () {
-    return view('activity.create');
-})->name('activity.create');
+});
 
-Route::get('/activity/index', function () {
-    return view('activity.index');
-})->name('activity.index');
+Route::prefix('activity')->group(function () {
+    Route::get('/index', [ActivityController::class, 'index'])->name('activity.index');
+    Route::get('/create', [ActivityController::class, 'create'])->name('activity.create');
+    Route::get('/edit/{id}', [ActivityController::class, 'edit'])->name('activity.edit');
+    Route::post('create', [ActivityController::class, 'store'])->name('activity.store');
+    Route::put('/edit/{id}', [ActivityController::class, 'update'])->name('activity.update');
+    Route::get('/destroy/{id}', [ActivityController::class, 'destroy'])->name('activity.destroy');
 
-Route::get('/activity/edit', function () {
-    return view('activity.edit');
-})->name('activity.edit');
-
-
-Route::get('/technician/create', function () {
-    return view('technician.create');
-})->name('technician.create');
-
-Route::get('/technician/index', function () {
-    return view('technician.index');
-})->name('technician.index');
-
-Route::get('/technician/edit', function () {
-    return view('technician.edit');
-})->name('technician.edit');
+});
 
 
 

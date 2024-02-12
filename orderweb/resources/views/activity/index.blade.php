@@ -6,7 +6,7 @@
     @include('templates.messages')
     <div class="row">
         <div class="col-lg-12 mb-4 d-grip gap-2 d-md-block">
-            <a href="{{ route('type_activity.create') }}" class="btn btn-primary">Crear actividad</a>
+            <a href="{{ route('activity.create') }}" class="btn btn-primary">Crear actividad</a>
         </div>
     </div>
 
@@ -20,34 +20,31 @@
                         <th>Id</th>
                         <th>Descripcion</th>
                         <th>Horas</th>
-                        <th>Tecnico</th>
+                        <th>Id del Tecnico</th>
                         <th>Tipo</th>
                         <th>Acciones</th>
-                        <th></th>
                     </tr>
                        
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>descripción</td>
-                        <td>15</td>
-                        <td>Software</td>
-                        <td>Sistemas</td>
-                        <td>
-                            <a href="{{ route('activity.create') }}" title="Editar" class="btn btn-info btn-circle btn-sm">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <a href="#" title="confirmar" class="btn btn-confirm btn-circle btn-sm" 
-                            style="background-color: green; color: white">
-                                <i class="fas fa-check"></i>
-                            </a>
-                            <a href="#" title="Eliminar" 
-                                class="btn btn-danger btn-circle btn-sm" onclick="return remove()">
-                                <i class="fas fa-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
+                    @foreach ($activitys as $activity)
+                        <tr>
+                            <td>{{ $activity['id'] }}</td>
+                            <td>{{ $activity['description'] }}</td>
+                            <td>{{ $activity['hours'] }}</td>
+                            <td>{{ $activity['technician_id'] }}</td>
+                            <td>{{ $activity['type_id'] }}</td>
+                            <td>
+                                <a href="{{ route('activity.edit', $activity['id']) }}" title="Editar" class="btn btn-info btn-circle btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="{{ route('activity.destroy', $activity['id']) }}" title="Eliminar" 
+                                    class="btn btn-danger btn-circle btn-sm" onclick="return remove()">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>        
         </div>

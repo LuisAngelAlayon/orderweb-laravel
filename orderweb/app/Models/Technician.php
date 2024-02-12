@@ -10,8 +10,10 @@ class Technician extends Model
     use HasFactory;
 
     protected $table = 'technician';
+    public $incrementing = false;
+    public $primaryKey = 'document';
 
-    protected $fillable = ['name', 'especiality', 'phone'];
+    protected $fillable = ['document', 'name', 'especiality', 'phone'];
 
     public function activities()
     {
