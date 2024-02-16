@@ -30,10 +30,10 @@ class OrderController extends Controller
         $causals = Causal::all();
         $observations = Observation::all();
         $cities = array(
-            ['name' => 'BUGA', 'value' => 'BUGA'],
-           ['name' => 'CALI', 'value' => 'CALI'],
-            ['name' => 'TULUA', 'value' => 'TULUA']
-            
+            ['name' => 'Buga', 'value' => 'Buga'],
+            ['name' => 'Cali', 'value' => 'Cali'],
+            ['name' => 'Tulua', 'value' => 'Tulua']
+
         );
         return view('order.create', compact('causals', 'observations', 'cities'));
     }
@@ -43,7 +43,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $order = Order::created($request->all());
+        $order = Order::create($request->all());
         session()->flash('message', 'Registro creado exitosamente');
         return redirect()->route('order.index');
     }
@@ -62,31 +62,30 @@ class OrderController extends Controller
     public function edit(string $id)
     {
         $order = Order::find($id);
-        if($order)
-        {
-        $causals = Causal::all();
-        $observations = Observation::all();
-        $cities = array(
-            ['name' => 'BUGA', 'value' => 'BUGA'],
-           ['name' => 'CALI', 'value' => 'CALI'],
-            ['name' => 'TULUA', 'value' => 'TULUA']
-            
-        );
-        //consultar actividades asociadas y no asociadas
-        $activitiesAdded = $order->activities;
-        //consultar actividades no asociadas
-        $query = DB::select('SELECT * FROM activity WHERE activity.id NOT IN
+        if ($order) {
+            $causals = Causal::all();
+            $observations = Observation::all();
+            $cities = array(
+                ['name' => 'BUGA', 'value' => 'BUGA'],
+                ['name' => 'CALI', 'value' => 'CALI'],
+                ['name' => 'TULUA', 'value' => 'TULUA']
+
+            );
+            //consultar actividades asociadas y no asociadas
+            $activitiesAdded = $order->activities;
+            //consultar actividades no asociadas
+            $query = DB::select('SELECT * FROM activity WHERE activity.id NOT IN
         (SELECT order_activity.activity_id FROM order_activity WHERE order_activity.order_id =?)', [$id]);
-        $activitiesNotInOrder = Collection::make($query);
+            $activitiesNotInOrder = Collection::make($query);
 
 
-        return view('order.edit', compact('order', 'causals', 'observations', 'cities', 'activitiesAdded', 'activitiesNotInOrder'));
+            return view('order.edit', compact('order', 'causals', 'observations', 'cities', 'activitiesAdded', 'activitiesNotInOrder'));
         }
-    session()->flash('warning'. 'No se encuentra el registro solicitado');
-    return redirect()->route('order.index');
+        session()->flash('warning' . 'No se encuentra el registro solicitado');
+        return redirect()->route('order.index');
     }
 
-        
+
 
     /**
      * Update the specified resource in storage.
@@ -94,13 +93,10 @@ class OrderController extends Controller
     public function update(Request $request, string $id)
     {
         $order = Order::find($id);
-        if($order)
-        {
+        if ($order) {
             $order->update($request->all());
             session()->flash('message', 'Registro actualizado exitosamente');
-        }
-        else
-        {
+        } else {
             session()->flash('warning', 'No se encuentra el registro solicitado');
         }
 
@@ -114,13 +110,10 @@ class OrderController extends Controller
     public function destroy(string $id)
     {
         $order = Order::find($id);
-        if($order)
-        {
+        if ($order) {
             $order->delete();
             session()->flash('message', 'Registro actualizado exitosamente');
-        }
-        else
-        {
+        } else {
             session()->flash('warning', 'No se encuentra el registro solicitado');
         }
 
@@ -130,15 +123,13 @@ class OrderController extends Controller
     public function add_activity(string $order_id, string $activity_id)
     {
         $order = Order::find($order_id);
-        if(!$order)
-        {
+        if (!$order) {
             session()->flash('error', 'No se enceuntra la orden');
             return redirect()->route('order.edit', $order_id);
         }
 
         $activity = Activity::find($activity_id);
-        if(!$activity)
-        {
+        if (!$activity) {
             session()->flash('error', 'No se enceuntra la actividad');
             return redirect()->route('order.edit', $activity_id);
         }
@@ -151,15 +142,13 @@ class OrderController extends Controller
     public function remove_activity(string $order_id, string $activity_id)
     {
         $order = Order::find($order_id);
-        if(!$order)
-        {
+        if (!$order) {
             session()->flash('error', 'No se enceuntra la orden');
             return redirect()->route('order.edit', $order_id);
         }
 
         $activity = Activity::find($activity_id);
-        if(!$activity)
-        {
+        if (!$activity) {
             session()->flash('error', 'No se enceuntra la actividad');
             return redirect()->route('order.edit', $activity_id);
         }
