@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('order', function (Blueprint $table) {
             $table->id();
-            $table->date('legalization_date')->comment('fecha legalizacion');
-            $table->string('addres', 50)->comment('direccion');
-            $table->string('city', 50)->comment('ciudad');
+            $table->date('legalization_date')->comment('fecha legalización');
+            $table->string('address',50)->comment('direción');
+            $table->string('city',50)->comment('ciudad');
             $table->foreignId('observation_id')->nullable()
-                  ->constrained('observation');
+                    ->constrained('observation')
+                    ->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('causal_id')->nullable()
-                  ->constrained('causal')
-                  ->onDelete('cascade')
-                  ->onUpdate('cascade');
+                    ->constrained('causal')
+                    ->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

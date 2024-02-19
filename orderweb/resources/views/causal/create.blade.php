@@ -1,24 +1,23 @@
 @extends('templates.base')
-
-@section('title', 'Crear Causal')
-@section('headers', 'Crear Causal')
-
+@section('title', 'Crear causal')
+@section('header', 'Crear causal')
 @section('content')
     @include('templates.messages')
-
     <div class="row">
-        <div class="col lg-12 mb-4">
+        <div class="col-lg-12 mb-4">
             <form action="{{ route('causal.store') }}" method="POST">
                 @csrf
                 <div class="row form-group">
-                    <div class="col lg-12 mb-4">
-                        <label for="description">Descripción</label>
-                        <input type="text" class="form-control" id="description" name="description" required>
+                    <div class="col-lg-12 mb-4">
+                        <label for="description">Descripción</label>
+                        <input type="text" class="form-control"
+                        id="description" name="description" required>
                     </div>
                 </div>
                 <div class="row form-group">
                     <div class="col-lg-6 mb-4">
-                        <button type="submit" class="btn btn-primary btn-block">
+                        <button class="btn btn-primary btn-block"
+                            type="submit">
                             Guardar
                         </button>
                     </div>
@@ -26,17 +25,14 @@
                         <a href="{{ route('causal.index') }}" class="btn btn-secondary btn-block">
                             Cancelar
                         </a>
+
                     </div>
                 </div>
             </form>
-            <div class="row">
-                <div class="col-lg-12 mb-4">
-                    <div class="alert alert-warning" role="alert">
-                        <i class="fa-solid fa-lightbulb"></i>
-                        Para añadir actividades el causal primero debe crearlas y luego dar click en la accion editar
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 @endsection
+    
+
+    
+

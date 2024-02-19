@@ -16,8 +16,8 @@ class ObservationSeeder extends Seeder
         Observation::insert([
             ['description' => 'Perro bravo'],
             ['description' => 'Contador con candado'],
-            ['description' => 'Contador inacesible'],
-            ['description' => 'Predio en construccion'],
+            ['description' => 'Contador inaccesible'],
+            ['description' => 'Predio en construcción'],
             ['description' => 'No existe contador'],
         ]);
     }

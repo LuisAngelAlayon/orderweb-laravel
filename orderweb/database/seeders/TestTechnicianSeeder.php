@@ -8,23 +8,13 @@ use Illuminate\Database\Seeder;
 
 class TestTechnicianSeeder extends Seeder
 {
-        /**
-         * Run the database seeds.
-         */
-        public function run(): void
-        {
-                $technician = new Technician();
-
-                $technician->document = 988998;
-                $technician->name = 'Luis Angel';
-                $technician->especiality = 'Software-programmer';
-                $technician->phone = '718241256';
-
-                $technician->document = 23456789;
-                $technician->name = 'Luis Angel';
-                $technician->especiality = 'Software-programmer';
-                $technician->phone = 718241256;
-                $technician->save();
-        }
-
+    public function run(): void
+    {
+        $technician = new Technician();
+        $technician->document= 989898;
+        $technician->name = 'Arnulfo Archundia';
+        $technician->especiality = 'Medicion de redes';
+        $technician->phone = '315312';
+        $technician->save(); 
+    }
 }

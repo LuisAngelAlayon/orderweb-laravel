@@ -16,9 +16,9 @@ class TestOrderActivitySeeder extends Seeder
     {
         $order = Order::find(1);
         $activity = Activity::find(1);
-        //Guardaremos en order_activity para la orden 1 la actividad 1
+        //Guardamos en order_activity para la orden 1 la actividad 1
         $order->activities()->attach($activity->id);
-        //quitaremos la actividad  de la orden 
-        /*$order->activities()->detach($activity->id);*/
+        //Quitar la actividad para una orden
+        //$order->activies()->detach($activity->id);
     }
 }

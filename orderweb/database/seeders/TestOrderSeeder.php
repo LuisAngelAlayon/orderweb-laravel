@@ -16,12 +16,13 @@ class TestOrderSeeder extends Seeder
     {
         $order = new Order();
         $order->legalization_date = '2024-01-29';
-        $order->address = 'Calle Cra 1 # 2 - 3';
-        $order->city = 'Tulua';
+        $order->addres = 'Cra 1 # 2 - 3';
+        $order->city = 'TULUA';
         $order->observation_id = null;
-
-        $causal = Causal::find(1);
+        //FK causal
+        $causal = Causal::find(2);
         $order->causal_id = $causal->id;
         $order->save();
     }
 }
+

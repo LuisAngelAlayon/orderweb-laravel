@@ -8,12 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Technician extends Model
 {
     use HasFactory;
-
+    
     protected $table = 'technician';
     public $incrementing = false;
-    public $primaryKey = 'document';
+    protected $primaryKey = 'document';
+    protected $fillable = [
 
-    protected $fillable = ['document', 'name', 'especiality', 'phone'];
+        'document',
+        'name',
+        'especiality',
+        'phone'
+    ];
 
     public function activities()
     {

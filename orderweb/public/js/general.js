@@ -1,10 +1,10 @@
-$(document).ready(function() 
-{
-    $('#table_date').DataTable();
+$(document).ready(function(){
+    $('#table_data').DataTable();
 });
-
-function remove() 
+function remove()
 {
-  if (confirm('¿Desea eliminar este registro?'));
-    return true;
+    if(confirm("¿Está seguro de eliminar el registro?"))
+        return true;
+    else
+        return false;
 }

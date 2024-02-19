@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('role', function (Blueprint $table) {
-            $table->id()-> comment('Id del rol');
-            $table->string('name')-> comment('Tipo de rol: SUPERVISOR, ADMINISTRADOR');
+        Schema::create('observation', function (Blueprint $table) {
+            $table->id();
+            $table->string('description', 50)->comment('descripción observacion');
             $table->timestamps();
         });
     }
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('role');
+        Schema::dropIfExists('observation');
     }
 };

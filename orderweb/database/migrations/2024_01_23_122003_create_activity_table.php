@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('activity', function (Blueprint $table) {
             $table->id();
-            $table->string('description', 100)->comment('descripcion actividad');
+            $table->string('description',100)->comment('descripción actividad');
             $table->integer('hours')->comment('horas estimadas');
             $table->unsignedBigInteger('technician_id');
-            $table->foreign('technician_id')->references('document')
-                   ->on('technician')
-                   ->onDelete('cascade')
-                   ->onUpdate('cascade');
-            $table->foreignId('type_id')->constrained('type_activity')
-                   ->onDelete('cascade')
-                   ->onUpdate('cascade'); 
+            $table->foreign('technician_id')->references('document')->on('technician') #para agregar una llave foranea cuando la llave principal no es autoincremental
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+            $table->foreignId('type_id')->constrained('type_activity')  #constrained es para decir a que tabla apunta
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+
             $table->timestamps();
         });
     }

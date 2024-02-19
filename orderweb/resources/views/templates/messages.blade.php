@@ -15,7 +15,6 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>            
-            
         @endif 
         @if (session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">

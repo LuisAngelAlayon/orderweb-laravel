@@ -11,15 +11,20 @@ class OrderActivity extends Model
 
     protected $table = 'order_activity';
 
-    protected $fillable = ['order_id', 'activity_id'];
+    protected $fillable = [
 
+        'order_id',
+        'activity_id',
+        
+    ];
     public function order()
     {
         return $this->belongsTo(Order::class);
-    }
 
-    public function activity()
+    }
+    public function actvity()
     {
         return $this->belongsTo(Activity::class);
+
     }
 }

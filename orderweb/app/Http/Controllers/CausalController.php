@@ -12,7 +12,7 @@ class CausalController extends Controller
      */
     public function index()
     {
-        $causals = Causal::all();
+        $causals = Causal::all();    //select * from causal
         //dd($causals);
         return view('causal.index', compact('causals'));
     }
@@ -49,9 +49,12 @@ class CausalController extends Controller
     public function edit(string $id)
     {
         $causal = Causal::find($id);
-        if ($causal) {
+        if($causal)
+        {
             return view('causal.edit', compact('causal'));
-        } else {
+        }
+        else
+        {
             return redirect()->route('causal.index');
         }
     }
@@ -62,16 +65,20 @@ class CausalController extends Controller
     public function update(Request $request, string $id)
     {
         $causal = Causal::find($id);
-        if ($causal) {
-            $causal->update($request->all()); // update causals set .....description =....
-            session()->flash('message', 'Registro actualizado exitosamente');
-        } else {
-            session()->flash('warning', 'No se encontro el registro solicitado');
+        if($causal)
+        {
+            $causal->update($request->all()); //Delete from causal where id = x
+            session()->flash('message', 'Registro eliminado exitosamente');
+        }
+        else
+        {
+            return redirect()->route('causal.index');
+            session()->flash('warning', 'No se encuentra el registro solicitado');
+
         }
 
         return redirect()->route('causal.index');
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -79,11 +86,16 @@ class CausalController extends Controller
     public function destroy(string $id)
     {
         $causal = Causal::find($id);
-        if ($causal) {
-            $causal->delete(); // DELETE FROM causals WHERE id = $id
+        if($causal)
+        {
+            $causal->delete(); //Delete from causal where id = x
             session()->flash('message', 'Registro eliminado exitosamente');
-        } else {
-            session()->flash('warning', 'No se encontro el registro solicitado');
+        }
+        else
+        {
+            return redirect()->route('causal.index');
+            session()->flash('warning', 'No se encuentra el registro solicitado');
+
         }
 
         return redirect()->route('causal.index');

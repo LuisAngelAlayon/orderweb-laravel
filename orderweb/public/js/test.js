@@ -1,4 +1,4 @@
-function show_alert(){
-  alert('Ou!!!');
+function show_alert()
+{
+    alert("Ou!!!");
 }
-
