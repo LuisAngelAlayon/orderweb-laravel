@@ -16,7 +16,7 @@ class TestOrderSeeder extends Seeder
     {
         $order = new Order();
         $order->legalization_date = '2024-01-29';
-        $order->addres = 'Cra 1 # 2 - 3';
+        $order->address = 'Cra 1 # 2 - 3';
         $order->city = 'TULUA';
         $order->observation_id = null;
         //FK causal

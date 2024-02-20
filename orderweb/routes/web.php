@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CausalController;
 use App\Http\Controllers\ObservationController;
 use App\Http\Controllers\OrderController;
@@ -19,89 +20,98 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', [AuthController::class, 'index']);
+
+Route::middleware('auth')->get('/index', function () {
     return view('index');
 })->name('index');
 
-Route::get('/test2', function () {
+/*Route::get('/test2', function () {
     return view('test2');
-})->name('test2');
+})->name('test2');*/
+
+Route::prefix('auth')->group(function () {
+    Route::get('/index', [AuthController::class, 'index'])->name('auth.index');
+    Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+    Route::get('/register', [AuthController::class, 'create'])->name('auth.register');
+    Route::post('/register', [AuthController::class, 'store'])->name('auth.store');
+});
 
 
+Route::middleware(['auth', 'can:ADMINISTRADOR'])->prefix('causal')->group(function () {
 
-Route::prefix('causal')->group(function(){
-
-   Route::get('/index' , [CausalController::class, 'index'])->name('causal.index');
-   Route::get('/create' , [CausalController::class, 'create'])->name('causal.create');
-   Route::get('/edit/{id}' , [CausalController::class, 'edit'])->name('causal.edit');
-   Route::post('/create' , [CausalController::class, 'store'])->name('causal.store');
-   Route::put('/edit/{id}' , [CausalController::class, 'update'])->name('causal.update');
-   Route::get('/destroy/{id}' , [CausalController::class, 'destroy'])->name('causal.destroy');
+    Route::get('/index', [CausalController::class, 'index'])->name('causal.index');
+    Route::get('/create', [CausalController::class, 'create'])->name('causal.create');
+    Route::get('/edit/{id}', [CausalController::class, 'edit'])->name('causal.edit');
+    Route::post('/create', [CausalController::class, 'store'])->name('causal.store');
+    Route::put('/edit/{id}', [CausalController::class, 'update'])->name('causal.update');
+    Route::get('/destroy/{id}', [CausalController::class, 'destroy'])->name('causal.destroy');
 
 });
 
 
 
-Route::prefix('observation')->group(function(){
+Route::middleware(['auth', 'can:ADMINISTRADOR'])->prefix('observation')->group(function () {
 
-    Route::get('/index' , [ObservationController::class, 'index'])->name('observation.index');
-    Route::get('/create' , [ObservationController::class, 'create'])->name('observation.create');
-    Route::get('/edit/{id}' , [ObservationController::class, 'edit'])->name('observation.edit');
-    Route::post('/create' , [ObservationController::class, 'store'])->name('observation.store');
-    Route::put('/edit/{id}' , [ObservationController::class, 'update'])->name('observation.update');
-    Route::get('/destroy/{id}' , [ObservationController::class, 'destroy'])->name('observation.destroy');
- 
- });
+    Route::get('/index', [ObservationController::class, 'index'])->name('observation.index');
+    Route::get('/create', [ObservationController::class, 'create'])->name('observation.create');
+    Route::get('/edit/{id}', [ObservationController::class, 'edit'])->name('observation.edit');
+    Route::post('/create', [ObservationController::class, 'store'])->name('observation.store');
+    Route::put('/edit/{id}', [ObservationController::class, 'update'])->name('observation.update');
+    Route::get('/destroy/{id}', [ObservationController::class, 'destroy'])->name('observation.destroy');
 
-
-
-
-Route::prefix('type_activity')->group(function(){
-
-    Route::get('/index' , [TypeActivityController::class, 'index'])->name('type_activity.index');
-    Route::get('/create' , [TypeActivityController::class, 'create'])->name('type_activity.create');
-    Route::get('/edit/{id}' , [TypeActivityController::class, 'edit'])->name('type_activity.edit');
-    Route::post('/create' , [TypeActivityController::class, 'store'])->name('type_activity.store'); //El post es para almacenar los datos en la store
-    Route::put('/edit/{id}' , [TypeActivityController::class, 'update'])->name('type_activity.update'); //El put es para actualizar y editar
-    Route::get('/destroy/{id}' , [TypeActivityController::class, 'destroy'])->name('type_activity.destroy');
- 
- });
-
-
-Route::prefix('technician')->group(function(){
-
-    Route::get('/index' , [TechnicianController::class, 'index'])->name('technician.index');
-    Route::get('/create' , [TechnicianController::class, 'create'])->name('technician.create');
-    Route::get('/edit/{document}' , [TechnicianController::class, 'edit'])->name('technician.edit');
-    Route::post('/create' , [TechnicianController::class, 'store'])->name('technician.store'); //El post es para almacenar los datos en la store
-    Route::put('/edit/{document}' , [TechnicianController::class, 'update'])->name('technician.update'); //El put es para actualizar y editar
-    Route::get('/destroy/{document}' , [TechnicianController::class, 'destroy'])->name('technician.destroy');
- 
 });
 
 
-Route::prefix('activity')->group(function(){
 
-    Route::get('/index' , [ActivityController::class, 'index'])->name('activity.index');
-    Route::get('/create' , [ActivityController::class, 'create'])->name('activity.create');
-    Route::get('/edit/{id}' , [ActivityController::class, 'edit'])->name('activity.edit');
-    Route::post('/create' , [ActivityController::class, 'store'])->name('activity.store'); //El post es para almacenar los datos en la store
-    Route::put('/edit/{id}' , [ActivityController::class, 'update'])->name('activity.update'); //El put es para actualizar y editar
-    Route::get('/destroy/{id}' , [ActivityController::class, 'destroy'])->name('activity.destroy');
- 
+
+Route::middleware(['auth', 'can:ADMINISTRADOR'])->prefix('type_activity')->group(function () {
+
+    Route::get('/index', [TypeActivityController::class, 'index'])->name('type_activity.index');
+    Route::get('/create', [TypeActivityController::class, 'create'])->name('type_activity.create');
+    Route::get('/edit/{id}', [TypeActivityController::class, 'edit'])->name('type_activity.edit');
+    Route::post('/create', [TypeActivityController::class, 'store'])->name('type_activity.store'); //El post es para almacenar los datos en la store
+    Route::put('/edit/{id}', [TypeActivityController::class, 'update'])->name('type_activity.update'); //El put es para actualizar y editar
+    Route::get('/destroy/{id}', [TypeActivityController::class, 'destroy'])->name('type_activity.destroy');
+
 });
 
-Route::prefix('order')->group(function(){
 
-    Route::get('/index' , [OrderController::class, 'index'])->name('order.index');
-    Route::get('/create' , [OrderController::class, 'create'])->name('order.create');
-    Route::get('/edit/{id}' , [OrderController::class, 'edit'])->name('order.edit');
-    Route::post('/create' , [OrderController::class, 'store'])->name('order.store'); //El post es para almacenar los datos en la store
-    Route::put('/edit/{id}' , [OrderController::class, 'update'])->name('order.update'); //El put es para actualizar y editar
-    Route::get('/destroy/{id}' , [OrderController::class, 'destroy'])->name('order.destroy');
+Route::middleware(['auth', 'can:SUPERVISOR'])->prefix('technician')->group(function () {
+
+    Route::get('/index', [TechnicianController::class, 'index'])->name('technician.index');
+    Route::get('/create', [TechnicianController::class, 'create'])->name('technician.create');
+    Route::get('/edit/{document}', [TechnicianController::class, 'edit'])->name('technician.edit');
+    Route::post('/create', [TechnicianController::class, 'store'])->name('technician.store'); //El post es para almacenar los datos en la store
+    Route::put('/edit/{document}', [TechnicianController::class, 'update'])->name('technician.update'); //El put es para actualizar y editar
+    Route::get('/destroy/{document}', [TechnicianController::class, 'destroy'])->name('technician.destroy');
+
+});
+
+
+Route::middleware(['auth', 'can:ADMINISTRADOR-SUPERVISOR'])->prefix('activity')->group(function () {
+
+    Route::get('/index', [ActivityController::class, 'index'])->name('activity.index');
+    Route::get('/create', [ActivityController::class, 'create'])->name('activity.create');
+    Route::get('/edit/{id}', [ActivityController::class, 'edit'])->name('activity.edit');
+    Route::post('/create', [ActivityController::class, 'store'])->name('activity.store'); //El post es para almacenar los datos en la store
+    Route::put('/edit/{id}', [ActivityController::class, 'update'])->name('activity.update'); //El put es para actualizar y editar
+    Route::get('/destroy/{id}', [ActivityController::class, 'destroy'])->name('activity.destroy');
+
+});
+
+Route::middleware(['auth', 'can:ADMINISTRADOR-SUPERVISOR'])->prefix('order')->group(function () {
+
+    Route::get('/index', [OrderController::class, 'index'])->name('order.index');
+    Route::get('/create', [OrderController::class, 'create'])->name('order.create');
+    Route::get('/edit/{id}', [OrderController::class, 'edit'])->name('order.edit');
+    Route::post('/create', [OrderController::class, 'store'])->name('order.store'); //El post es para almacenar los datos en la store
+    Route::put('/edit/{id}', [OrderController::class, 'update'])->name('order.update'); //El put es para actualizar y editar
+    Route::get('/destroy/{id}', [OrderController::class, 'destroy'])->name('order.destroy');
     Route::get('/add_activity/{order_id}/{activity_id}', [OrderController::class, 'add_activity'])->name('order.add_activity');
     Route::get('/remove_activity/{order_id}/{activity_id}', [OrderController::class, 'remove_activity'])->name('order.remove_activity');
- 
+
 });
 
 

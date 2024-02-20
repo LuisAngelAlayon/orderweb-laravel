@@ -63,6 +63,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TestOrderSeeder::class);
         $this->call(TestOrderActivitySeeder::class);*/
     }
-    
+
 
 }
