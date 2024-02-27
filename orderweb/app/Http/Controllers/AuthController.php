@@ -4,33 +4,31 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-
+    
     private $rules = [
-        'name' => 'required |string|max:255',
-        'email' => 'required |string|email|max:255|unique:users',
-        'password' => 'required |string|min:8|max:255',
-        'password_confirmation' => 'required |string|min:8|max:255|same:password',
+        'name' => 'required|string|max:225',
+        'email' => 'required|string|email|unique:users',
+        'password' => 'required|string|min:8|max:255',
+        'password_confirmation' => 'required|same:password'
     ];
 
     private $traductionAttributes = array(
         'name' => 'Nombre',
-        'password' => 'Contraseña',
-
+        'password' => 'Contraseña'
     );
-
-
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        if (auth()->check()) {
+        if(Auth::check())
+        {
             return redirect()->route('index');
         }
 
@@ -50,50 +48,47 @@ class AuthController extends Controller
      */
     public function store(Request $request)
     {
-
         $validator = Validator::make($request->all(), $this->rules);
         $validator->setAttributeNames($this->traductionAttributes);
-
-        if ($validator->fails()) {
-
+        if($validator->fails())
+        {
             $errors = $validator->errors();
-            return redirect('auth/register')->withErrors($validator)->withInput();
+            return redirect()->route('auth.register')->withInput()->withErrors($errors);
         }
-
+        
         $request['password'] = bcrypt($request['password']);
         $user = User::create($request->all());
-        session()->flash('message', 'Registro creado exitosamente');
+        session()->flash('message', 'Usuario Registrado Exitosamente');
         return redirect()->route('auth.index');
-
     }
-
-
 
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+            'email' => 'required|email',
+            'password' => 'required|min:8'
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if(Auth::attempt($credentials))
+        {
             $request->session()->regenerate();
-            return redirect()->intended('index');
+            return redirect()->intended();
         }
 
         return back()->withErrors([
-            'email' => 'Credenciales incorrectas, intente de nuevo',
+            'email' => 'Credenciales Incorrectas, Intente De Nuevo'
         ])->onlyInput('email');
     }
-
+    
+    //Cierre De Sesión
     public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
-        return redirect('auth/index');
-
+        return redirect()->route('auth.index');
     }
-
+    
+    
     /**
      * Display the specified resource.
      */

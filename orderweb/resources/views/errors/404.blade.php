@@ -1,26 +1,23 @@
 @extends('templates.base')
-
-@section('title', '404')
-@section('header', '404')
-
+@section('title', 'Error 404')
+@section('header', 'Error 404')
 @section('content')
     <div class="card">
         <div class="card-block">
             <div class="row align-items-center m-b-20">
                 <div class="col-md-6 text-center">
-                    <img src="{{ asset('img/denied.png') }}" alt="404" 
-                    class="img-fluid" style="width: 50%; height: auto;">
+                    <img src="{{ asset('img/denied.png') }}" alt="404" class="img-fluid" style="width: 50%; height: auto;">
                 </div>
                 <div class="col-md-6 text-center">
-                    <div class="d-flex-column align-items-center h-100">
+                    <div class="d-flex flex-column align-items-center h-100">
                         <h1 class="display-1">404</h1>
-                        <h2 class="text-center">No se encontro la pagina solicitada</h2>
+                        <h2>Página No Encontrada</h2>
                         <a href="javascript:history.back()">
-                            <h4 class="text-success">Regresar</h4>
+                            <h4 class="text-success">Volver</h4>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-@endSection 
+@endsection

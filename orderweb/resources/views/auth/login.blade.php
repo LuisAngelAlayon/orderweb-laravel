@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,38 +19,31 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-10 col-lg-12 col-md-9">
-                    <div class="card  o-hidden border-0 shadow-lg my-5">
+                    <div class="card o-hidden border-0 shadow-lg my-5">
                         <div class="card-body p-0">
                             <div class="row">
                                 <div class="col-lg-6 d-none d-lg-block">
-                                    <img src="{{ asset('img/work_order_logo.png') }}" alt="login" class="img-fluid">
+                                    <img src="{{ asset('img/work_order_logo.jpg') }}" alt="login" class="img-fluid">
                                 </div>
-                                <div class="col lg-6">
+                                <div class="col-lg-6">
                                     <div class="p-5">
                                         <div class="text-center">
-                                            <h1 class="h4 text-gray-900 mb-4">Bienvenido</h1>
+                                            <h1 class="h4 text-gray-900 mb-4">¡¡¡BIENVENIDO!!!</h1>
                                         </div>
-                                            
-
                                         @include('templates.messages')
-
-                                        <form class="user" method="POST" action="{{ route('auth.login') }}">
+                                        <form class="user" action="{{ route('auth.login') }}" method="POST">
                                             @csrf
                                             <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="email" name="email" placeholder="Correo Electronico">
+                                                <input type="email" class="form-control form-control-user" id="email" name="email" placeholder="Correo Electrónico">
                                             </div>
                                             <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="password" name="password" placeholder="Contraseña">
+                                                <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Contraseña">
                                             </div>
-                                            <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            Ingresar
-                                            </button>
+                                            <button type="submit" class="btn btn-primary btn-user btn-block">INGRESAR</button>
                                         </form>
                                         <hr>
                                         <div class="text-center">
-                                            <a href="{{ route('auth.register') }}" class="small">Registrarse</a>
+                                            <a href="{{ route('auth.register') }}" class="small">REGISTRARSE</a>
                                         </div>
                                     </div>
                                 </div>

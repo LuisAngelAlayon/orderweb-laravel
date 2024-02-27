@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CausalController;
 use App\Http\Controllers\ObservationController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TechnicianController;
 use App\Http\Controllers\TypeActivityController;
 use Illuminate\Support\Facades\Route;
@@ -30,7 +31,11 @@ Route::middleware('auth')->get('/index', function () {
     return view('test2');
 })->name('test2');*/
 
+
+
+
 Route::prefix('auth')->group(function () {
+
     Route::get('/index', [AuthController::class, 'index'])->name('auth.index');
     Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
     Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
@@ -39,7 +44,8 @@ Route::prefix('auth')->group(function () {
 });
 
 
-Route::middleware(['auth', 'can:ADMINISTRADOR'])->prefix('causal')->group(function () {
+
+Route::middleware(['auth', 'can:administrador'])->prefix('causal')->group(function () {
 
     Route::get('/index', [CausalController::class, 'index'])->name('causal.index');
     Route::get('/create', [CausalController::class, 'create'])->name('causal.create');
@@ -52,7 +58,7 @@ Route::middleware(['auth', 'can:ADMINISTRADOR'])->prefix('causal')->group(functi
 
 
 
-Route::middleware(['auth', 'can:ADMINISTRADOR'])->prefix('observation')->group(function () {
+Route::middleware(['auth', 'can:administrador'])->prefix('observation')->group(function () {
 
     Route::get('/index', [ObservationController::class, 'index'])->name('observation.index');
     Route::get('/create', [ObservationController::class, 'create'])->name('observation.create');
@@ -66,7 +72,7 @@ Route::middleware(['auth', 'can:ADMINISTRADOR'])->prefix('observation')->group(f
 
 
 
-Route::middleware(['auth', 'can:ADMINISTRADOR'])->prefix('type_activity')->group(function () {
+Route::middleware(['auth', 'can:administrador'])->prefix('type_activity')->group(function () {
 
     Route::get('/index', [TypeActivityController::class, 'index'])->name('type_activity.index');
     Route::get('/create', [TypeActivityController::class, 'create'])->name('type_activity.create');
@@ -78,7 +84,7 @@ Route::middleware(['auth', 'can:ADMINISTRADOR'])->prefix('type_activity')->group
 });
 
 
-Route::middleware(['auth', 'can:SUPERVISOR'])->prefix('technician')->group(function () {
+Route::middleware(['auth', 'can:supervisor'])->prefix('technician')->group(function () {
 
     Route::get('/index', [TechnicianController::class, 'index'])->name('technician.index');
     Route::get('/create', [TechnicianController::class, 'create'])->name('technician.create');
@@ -90,7 +96,7 @@ Route::middleware(['auth', 'can:SUPERVISOR'])->prefix('technician')->group(funct
 });
 
 
-Route::middleware(['auth', 'can:ADMINISTRADOR-SUPERVISOR'])->prefix('activity')->group(function () {
+Route::middleware(['auth', 'can:admin-supervisor'])->prefix('activity')->group(function () {
 
     Route::get('/index', [ActivityController::class, 'index'])->name('activity.index');
     Route::get('/create', [ActivityController::class, 'create'])->name('activity.create');
@@ -101,7 +107,7 @@ Route::middleware(['auth', 'can:ADMINISTRADOR-SUPERVISOR'])->prefix('activity')-
 
 });
 
-Route::middleware(['auth', 'can:ADMINISTRADOR-SUPERVISOR'])->prefix('order')->group(function () {
+Route::middleware(['auth', 'can:admin-supervisor'])->prefix('order')->group(function () {
 
     Route::get('/index', [OrderController::class, 'index'])->name('order.index');
     Route::get('/create', [OrderController::class, 'create'])->name('order.create');
@@ -114,13 +120,16 @@ Route::middleware(['auth', 'can:ADMINISTRADOR-SUPERVISOR'])->prefix('order')->gr
 
 });
 
+Route::middleware(['auth', 'can:administrador'])->prefix('reports')->group(function () {
+    Route::get('/index', [ReportController::class, 'index'])->name('reports.index');
+    Route::get('/export_technicians', [ReportController::class, 'export_technicians'])->name('reports.technicians');
+    Route::get('/export_users', [ReportController::class, 'export_users'])->name('reports.users');
+    Route::post('/export_activities_by_technician', [ReportController::class, 'export_activities_by_technician'])
+        ->name('reports.activities_technician');
+    Route::post('/export_orders_by_legalization_date', [ReportController::class, 'export_orders_by_legalization_date'])
+        ->name('reports.orders_legalization_date');
 
 
-
-
-
-
-
-
+});
 
 

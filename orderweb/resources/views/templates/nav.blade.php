@@ -17,23 +17,20 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{{ route('index') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Home</span></a>
+                    <span>Inicio</span></a>
             </li>
 
-
-          
             <!-- Divider -->
             <hr class="sidebar-divider"/>
-        
+
             <!-- Heading -->
             <div class="sidebar-heading">
                 Ordenes
             </div>
 
+            @can('admin-supervisor')
+                
             
-    
-
-            @can('ADMINISTRADOR-SUPERVISOR')
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse1"
@@ -47,27 +44,24 @@
                             <a class="collapse-item" href="{{ route('order.create') }}">Crear</a>                        
                         </div>
                     </div>
-                </li> 
-            @endcan
+                </li>
+            @endcan 
 
-            @can('ADMINISTRADOR')
+            @can('administrador')
                 
-             
-             <li class="nav-item">
-                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse2"
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse2"
                     aria-expanded="true" aria-controls="collapse2">
-                     <i class="fas fa-fw fa-plus"></i>
-                     <span>Causales</span>
-                 </a>
-                 <div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                     <div class="bg-white py-2 collapse-inner rounded">
-                         <a class="collapse-item" href="{{ route('causal.index') }}">Consultar</a>
-                         <a class="collapse-item" href="{{ route('causal.create') }}">Crear</a>
-                     </div>
-                 </div>
-             </li> 
-            
-
+                        <i class="fas fa-fw fa-plus"></i>
+                        <span>Causales</span>
+                    </a>
+                    <div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{ route('causal.index') }}">Consultar</a>
+                            <a class="collapse-item" href="{{ route('causal.create') }}">Crear</a>
+                        </div>
+                    </div>
+                </li> 
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse3"
@@ -83,16 +77,17 @@
                     </div>
                 </li>
             @endcan
+
             <!-- Divider -->
             <hr class="sidebar-divider"/>
-            
+
             <!-- Heading -->
             <div class="sidebar-heading">
                 Actividades
             </div>
-        
+
             <!-- Nav Item - Pages Collapse Menu -->
-            @can('SUPERVISOR')
+            @can('admin-supervisor')
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse4"
                     aria-expanded="true" aria-controls="collapse4">
@@ -108,7 +103,7 @@
                 </li>
             @endcan
 
-            @can('ADMINISTRADOR')
+            @can('administrador')
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse5"
                     aria-expanded="true" aria-controls="collapse5">
@@ -126,14 +121,13 @@
             <!-- Divider -->
             <hr class="sidebar-divider"/>
 
-
-            @can('SUPERVISOR')
-                    
-                <!-- Heading -->
+            <!-- Heading -->
+            @can('supervisor')
                 <div class="sidebar-heading">
                     Técnicos
                 </div>
 
+                
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse6"
                     aria-expanded="true" aria-controls="collapse6">
@@ -147,6 +141,25 @@
                         </div>
                     </div>
                 </li>
+            @endcan
+
+            @can('administrador')
+            <div class="sidebar-heading">
+                Reportes
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse7"
+                aria-expanded="true" aria-controls="collapse7">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Reportes</span>
+                </a>
+                <div id="collapse7" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('reports.index') }}">Consultar</a>
+                    </div>
+                </div>
+            </li>
             @endcan
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block" />
